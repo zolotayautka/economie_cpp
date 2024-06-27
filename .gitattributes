@@ -1,3 +1,12 @@
 sqlite3.c linguist-generated
 sqlite3.h linguist-generated
 mainqt.ui linguist-generated
+resource.qrc linguist-generated
+economie_cpp.pro linguist-generated
+economie_cpp_ja_JP.qm linguist-generated
+economie_cpp_ja_JP.ts linguist-generated
+economie_cpp_ko_KR.qm linguist-generated
+economie_cpp_ko_KR.ts linguist-generated
+imgs/* linguist-generated
+README.md linguist-generated
+.gitattributes linguist-generated
