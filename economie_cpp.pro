@@ -34,5 +34,5 @@ TRANSLATIONS += \
     economie_cpp_ja_JP.ts \
     economie_cpp_ko_KR.ts
 
-DEFINES += ko \
+DEFINES += ja \
     linux
