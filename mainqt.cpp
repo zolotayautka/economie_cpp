@@ -86,8 +86,9 @@ void mainQT::load_sel_day(){
         QTableWidgetItem* atai = new QTableWidgetItem(QString::number(sel_list[i].atai) + "₩");
         #endif
         ui->sel_table->setItem(l-1-i, 2, atai);
-        ui->sel_view->append(QString::fromStdString(sel_list[i].naiyou));
     }
+    for(int i = 0; i < l; i++)
+        ui->sel_view->append(QString::fromStdString(sel_list[l-1-i].naiyou));
 }
 
 void mainQT::ireru(){
