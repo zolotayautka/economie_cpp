@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Economie</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/imgs/icon.png</normaloff>:/imgs/icon.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QCalendarWidget" name="karenda">
     <property name="geometry">
@@ -174,7 +178,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <second>0</second>
         <year>1799</year>
         <month>12</month>
-        <day>31</day>
+        <day>30</day>
        </datetime>
       </property>
       <property name="displayFormat">
