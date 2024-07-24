@@ -38,7 +38,7 @@ void mainQT::all_load_day(){
     int l = all_list.size();
     ui->all_table->setRowCount(l);
     int nokori = 0;
-    for(int i = 0; i < l; i++){
+    for(int i = 0; i < l; i++){  // QTableWidgetItem客体はQTableWidget客体によって管理されるから別にdeleteを使う必要はありません。
         nokori += all_list[i].atai;
         QTableWidgetItem* day = new QTableWidgetItem(QString::fromStdString(all_list[i].day));
         ui->all_table->setItem(l-1-i, 0, day);
@@ -63,7 +63,7 @@ void mainQT::all_load_day(){
     }
 }
 
-void mainQT::load_sel_day(){
+void mainQT::load_sel_day(){  // QTableWidgetItem客体はQTableWidget客体によって管理されるから別にdeleteを使う必要はありません。
     ui->sel_table->setRowCount(0);
     ui->sel_view->setText("");
     QDate tday = ui->karenda->selectedDate();
