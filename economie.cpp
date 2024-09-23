@@ -69,7 +69,7 @@ void out(std::string filename){
         zangaku += tmp[i].atai;
         csv_file.push_back(tmp[i].day + ';' + tmp[i].naiyou + ';' + std::to_string(tmp[i].atai) + ';' + std::to_string(zangaku) + '\n');
     }
-    std::ofstream ofile(filename, std::ios_base::app);
+    std::ofstream ofile(filename, std::ios_base::out);
     for(int i = 0; i < size; i++){
         ofile << csv_file[i];
     }
