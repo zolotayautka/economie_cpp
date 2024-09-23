@@ -198,7 +198,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <second>0</second>
         <year>1799</year>
         <month>12</month>
-        <day>21</day>
+        <day>20</day>
        </datetime>
       </property>
       <property name="displayFormat">
@@ -364,10 +364,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>170</x>
       <y>280</y>
       <width>21</width>
-      <height>31</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -383,7 +383,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <widget class="QDateEdit" name="made">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>200</x>
       <y>280</y>
       <width>141</width>
       <height>41</height>
