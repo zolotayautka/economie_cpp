@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>961</width>
-    <height>632</height>
+    <height>681</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,7 +35,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>280</y>
+      <y>330</y>
       <width>941</width>
       <height>341</height>
      </rect>
@@ -87,7 +87,7 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>321</width>
+        <width>361</width>
         <height>111</height>
        </rect>
       </property>
@@ -116,6 +116,9 @@
         <height>91</height>
        </rect>
       </property>
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
       <property name="html">
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -123,17 +126,17 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu Sans'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'맑은 고딕'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu Sans'; font-size:11pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="del_btn">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>30</y>
-        <width>71</width>
-        <height>71</height>
+        <x>390</x>
+        <y>70</y>
+        <width>41</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="text">
@@ -142,6 +145,23 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="icon">
        <iconset resource="resource.qrc">
         <normaloff>:/imgs/del.png</normaloff>:/imgs/del.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="modify_btn">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="resource.qrc">
+        <normaloff>:/imgs/modify.png</normaloff>:/imgs/modify.png</iconset>
       </property>
      </widget>
     </widget>
@@ -178,7 +198,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <second>0</second>
         <year>1799</year>
         <month>12</month>
-        <day>30</day>
+        <day>21</day>
        </datetime>
       </property>
       <property name="displayFormat">
@@ -296,6 +316,79 @@ li.checked::marker { content: &quot;\2612&quot;; }
       </property>
      </widget>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="csv_import_btn">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>280</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/imgs/import.png</normaloff>:/imgs/import.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="csv_out_btn">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>280</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/imgs/out.png</normaloff>:/imgs/out.png</iconset>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="kara">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>280</y>
+      <width>21</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>~</string>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="made">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>280</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
    </widget>
   </widget>
  </widget>

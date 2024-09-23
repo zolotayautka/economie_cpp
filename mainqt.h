@@ -8,6 +8,8 @@
 #include <QMessageBox>
 #include <sys/stat.h>
 #include "economie.h"
+#include <QFileDialog>
+#include <cstdio>
 
 namespace Ui {
 class mainQT;
@@ -23,16 +25,15 @@ public:
 
 private:
     Ui::mainQT *ui;
-    chobo_exec* chobo;
-    cb* a;
-    std::vector<cb> all_list;
-    std::vector<cb> sel_list;
-    void all_load_day();
 
 private slots:
     void load_sel_day();
     void ireru();
-    void del_day();
+    void del_day_();
+    void search();
+    void import_();
+    void out_();
+    void modify();
 };
 
 #endif // MAINQT_H

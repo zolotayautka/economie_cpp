@@ -11,18 +11,24 @@ mainQT::mainQT(QWidget *parent)
     , ui(new Ui::mainQT)
 {
     ui->setupUi(this);
-    setFixedSize(QSize(961, 632));
+    setFixedSize(QSize(961, 681));
     ui->all_table->setColumnWidth(2, 500);
-    if (!(fileExists("book"))){
+    if (!(fileExists(".book"))){
         create_book();
     }
     ui->new_day->setDate(QDate::currentDate());
-    all_load_day();
+    ui->made->setDate(QDate::currentDate());
+    search();
     load_sel_day();
     connect(ui->karenda, &QCalendarWidget::clicked, this, &mainQT::load_sel_day);
     connect(ui->karenda, &QCalendarWidget::selectionChanged, this, &mainQT::load_sel_day);
     connect(ui->add_btn, &QPushButton::clicked, this, &mainQT::ireru);
-    connect(ui->del_btn, &QPushButton::clicked, this, &mainQT::del_day);
+    connect(ui->modify_btn, &QPushButton::clicked, this, &mainQT::modify);
+    connect(ui->del_btn, &QPushButton::clicked, this, &mainQT::del_day_);
+    connect(ui->csv_import_btn, &QPushButton::clicked, this, &mainQT::import_);
+    connect(ui->csv_out_btn, &QPushButton::clicked, this, &mainQT::out_);
+    connect(ui->kara, &QDateEdit::dateChanged, this, &mainQT::search);
+    connect(ui->made, &QDateEdit::dateChanged, this, &mainQT::search);
 }
 
 mainQT::~mainQT()
@@ -30,27 +36,30 @@ mainQT::~mainQT()
     delete ui;
 }
 
-void mainQT::all_load_day(){
-    ui->all_table->setRowCount(0);
-    chobo = new chobo_exec();
-    all_list = chobo->load_all();
-    delete chobo;
-    int l = all_list.size();
+void mainQT::search(){
+    ui->made->setMinimumDate(ui->kara->date());
+    ui->kara->setMaximumDate(ui->made->date());
+    std::vector<cb> slist = sagasu(ui->kara->date().toString("yyyyMMdd").toInt(), ui->made->date().toString("yyyyMMdd").toInt());
+    std::vector<cb> t = sagasu(0, ui->kara->date().toString("yyyyMMdd").toInt() - 1);
+    int nokor = 0;
+    for (int i = 0; i < (int)t.size(); i++)
+        nokor += t[i].atai;
+    int l = slist.size();
     ui->all_table->setRowCount(l);
-    int nokori = 0;
+    int nokori = nokor;
     for(int i = 0; i < l; i++){  // QTableWidgetItem客体はQTableWidget客体によって管理されるから別にdeleteを使う必要はありません。
-        nokori += all_list[i].atai;
-        QTableWidgetItem* day = new QTableWidgetItem(QString::fromStdString(all_list[i].day));
+        nokori += slist[i].atai;
+        QTableWidgetItem* day = new QTableWidgetItem(QString::fromStdString(slist[i].day));
         ui->all_table->setItem(l-1-i, 0, day);
-        QTableWidgetItem* nsf = new QTableWidgetItem(QString::fromStdString(all_list[i].nsf));
+        QTableWidgetItem* nsf = new QTableWidgetItem(QString::fromStdString(slist[i].nsf));
         ui->all_table->setItem(l-1-i, 1, nsf);
-        QTableWidgetItem* naiyou = new QTableWidgetItem(QString::fromStdString(all_list[i].naiyou));
+        QTableWidgetItem* naiyou = new QTableWidgetItem(QString::fromStdString(slist[i].naiyou));
         ui->all_table->setItem(l-1-i, 2, naiyou);
         #ifdef ja
-        QTableWidgetItem* atai = new QTableWidgetItem(QString::number(all_list[i].atai) + "¥");
+        QTableWidgetItem* atai = new QTableWidgetItem(QString::number(slist[i].atai) + "¥");
         #endif
         #ifdef ko
-        QTableWidgetItem* atai = new QTableWidgetItem(QString::number(all_list[i].atai) + "₩");
+        QTableWidgetItem* atai = new QTableWidgetItem(QString::number(slist[i].atai) + "₩");
         #endif
         ui->all_table->setItem(l-1-i, 3, atai);
         #ifdef ja
@@ -66,12 +75,8 @@ void mainQT::all_load_day(){
 void mainQT::load_sel_day(){  // QTableWidgetItem客体はQTableWidget客体によって管理されるから別にdeleteを使う必要はありません。
     ui->sel_table->setRowCount(0);
     ui->sel_view->setText("");
-    QDate tday = ui->karenda->selectedDate();
-    QString qday = tday.toString("yyyy-MM-dd");
-    std::string day = qday.toStdString();
-    chobo = new chobo_exec();
-    sel_list = chobo->load_sel(day);
-    delete chobo;
+    std::string day = ui->karenda->selectedDate().toString("yyyyMMdd").toStdString();
+    std::vector<cb> sel_list = load_sel(day);
     int l = sel_list.size();
     ui->sel_table->setRowCount(l);
     for(int i = 0; i < l; i++){
@@ -92,22 +97,18 @@ void mainQT::load_sel_day(){  // QTableWidgetItem客体はQTableWidget客体に�
 }
 
 void mainQT::ireru(){
-    a = new cb;
+    cb a;
     QDate tday = ui->new_day->date();
-    QString qday = tday.toString("yyyy-MM-dd");
-    a->day = qday.toStdString();
+    a.day = tday.toString("yyyyMMdd").toStdString();
     QString tn = ui->new_naiyou->text();
-    a->naiyou = tn.toStdString();
-    a->atai = ui->new_atai->value();
-    chobo = new chobo_exec();
-    chobo->insert_day(*a);
-    delete chobo;
-    delete a;
-    all_load_day();
+    a.naiyou = tn.toStdString();
+    a.atai = ui->new_atai->value();
+    insert_day(a);
+    search();
     load_sel_day();
 }
 
-void mainQT::del_day(){
+void mainQT::del_day_(){
     int t = ui->sel_table->rowCount();
     if (t == 0){
         return;
@@ -124,12 +125,60 @@ void mainQT::del_day(){
         return;
     }
     QDate tday = ui->karenda->selectedDate();
-    QString qday = tday.toString("yyyy-MM-dd");
+    QString qday = tday.toString("yyyyMMdd");
     std::string day = qday.toStdString();
-    chobo = new chobo_exec();
-    chobo->del_day(day);
-    delete chobo;
-    all_load_day();
+    del_day(day);
+    search();
     load_sel_day();
 }
 
+void mainQT::modify(){
+    int l = ui->sel_table->rowCount();
+    if (l < 1)
+        return;
+    std::string day = ui->karenda->selectedDate().toString("yyyyMMdd").toStdString();
+    std::string t = ui->sel_view->toPlainText().toStdString();
+    std::vector<cb> in;
+    std::stringstream line(t);
+    for (int i = 0; i < l; i++){
+        cb t_;
+        t_.day = day;
+        std::string s = ui->sel_table->item(i, 2)->text().toStdString();
+        s.pop_back();
+        s.pop_back();
+        t_.atai = std::stoi(s);
+        std::getline(line, t_.naiyou, '\n');
+        in.push_back(t_);
+    }
+    del_day(day);
+    for (int i = 0; i < l; i++)
+        insert_day(in[l-1-i]);
+    search();
+    load_sel_day();
+}
+
+void mainQT::import_(){
+    #ifdef ja
+    QMessageBox::StandardButton f = QMessageBox::question(this, "お知らせ", "既存のデータを維持しますか？",
+                                                          QMessageBox::Yes | QMessageBox::No);
+    #endif
+    #ifdef ko
+    QMessageBox::StandardButton f = QMessageBox::question(this, "알림", "기존 데이터를 유지하겠습니까?",
+                                                          QMessageBox::Yes | QMessageBox::No);
+    #endif
+    QString s = QCoreApplication::applicationDirPath();
+    std::string path = QFileDialog::getOpenFileName(this, "Select MP3 File", s, "CSV files (*.csv)").toStdString();
+    if (f == QMessageBox::No){
+        remove(".book");
+        create_book();
+    }
+    import(path);
+    search();
+    load_sel_day();
+}
+
+void mainQT::out_(){
+    QString s = QCoreApplication::applicationDirPath();
+    std::string path = QFileDialog::getSaveFileName(this, "Select MP3 File", s, "CSV files (*.csv)").toStdString();
+    out(path);
+}
