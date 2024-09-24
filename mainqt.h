@@ -9,7 +9,6 @@
 #include <sys/stat.h>
 #include "economie.h"
 #include <QFileDialog>
-#include <cstdio>
 
 namespace Ui {
 class mainQT;
