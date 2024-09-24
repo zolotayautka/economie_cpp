@@ -102,6 +102,8 @@ void mainQT::ireru(){
     a.day = tday.toString("yyyyMMdd").toStdString();
     QString tn = ui->new_naiyou->text();
     a.naiyou = tn.toStdString();
+    if (!a.naiyou.compare(""))
+        a.naiyou = "空欄";
     a.atai = ui->new_atai->value();
     insert_day(a);
     search();
@@ -144,10 +146,26 @@ void mainQT::modify(){
         cb t_;
         t_.day = day;
         std::string s = ui->sel_table->item(i, 2)->text().toStdString();
-        s.pop_back();
-        s.pop_back();
+        if (s.size()>2){
+            #ifdef ja
+            if (!(ui->sel_table->item(i, 2)->text().back() == QChar(L'¥'))){
+            #endif
+            #ifdef ko
+            if (!(ui->sel_table->item(i, 2)->text().back() == QChar(L'₩'))){
+            #endif
+                load_sel_day();
+                return;
+            }
+            s.pop_back();
+            s.pop_back();
+        } else {
+            load_sel_day();
+            return;
+        }
         t_.atai = std::stoi(s);
         std::getline(line, t_.naiyou, '\n');
+        if (!t_.naiyou.compare(""))
+            t_.naiyou = "空欄";
         in.push_back(t_);
     }
     del_day(day);
