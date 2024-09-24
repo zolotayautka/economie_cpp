@@ -41,12 +41,11 @@ void mainQT::search(){
     ui->kara->setMaximumDate(ui->made->date());
     std::vector<cb> slist = sagasu(ui->kara->date().toString("yyyyMMdd").toInt(), ui->made->date().toString("yyyyMMdd").toInt());
     std::vector<cb> t = sagasu(0, ui->kara->date().toString("yyyyMMdd").toInt() - 1);
-    int nokor = 0;
+    int nokori = 0;
     for (int i = 0; i < (int)t.size(); i++)
-        nokor += t[i].atai;
+        nokori += t[i].atai;
     int l = slist.size();
     ui->all_table->setRowCount(l);
-    int nokori = nokor;
     for(int i = 0; i < l; i++){  // QTableWidgetItem客体はQTableWidget客体によって管理されるから別にdeleteを使う必要はありません。
         nokori += slist[i].atai;
         QTableWidgetItem* day = new QTableWidgetItem(QString::fromStdString(slist[i].day));
