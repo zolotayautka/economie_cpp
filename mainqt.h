@@ -32,7 +32,6 @@ private slots:
     void search();
     void import_();
     void out_();
-    void modify();
 };
 
 #endif // MAINQT_H
