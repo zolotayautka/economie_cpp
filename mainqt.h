@@ -26,10 +26,11 @@ private:
     Ui::mainQT *ui;
 
 private slots:
+    void search();
     void load_sel_day();
     void ireru();
     void del_day_();
-    void search();
+    void modify();
     void import_();
     void out_();
 };
