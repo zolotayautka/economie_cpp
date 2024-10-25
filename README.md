@@ -1,8 +1,7 @@
 # Economie C++
 このアプリはC++で作られた家計簿です。  
 
-![1](https://github.com/zolotayautka/economie_cpp/assets/167955655/86fd6f93-fdcb-4de2-9614-813153b40abc)
-![2](https://github.com/zolotayautka/economie_cpp/assets/167955655/839d1579-5a67-444d-9f2c-67a1d4d71e07)
-![3](https://github.com/zolotayautka/economie_cpp/assets/167955655/ccfafec6-3572-4bc2-b0f4-69faaddb311d)
-![4](https://github.com/zolotayautka/economie_cpp/assets/167955655/c4bc1539-6880-4304-8a04-c48f91dda1b0)
-![5](https://github.com/zolotayautka/economie_cpp/assets/167955655/922e8a89-0434-4521-8374-67574a0366a9)
+![1](https://github.com/user-attachments/assets/bab014b8-4f2c-4004-a056-72904c0ef23a)
+![2](https://github.com/user-attachments/assets/550d32c0-866a-4ae8-b372-95018e4d9725)
+![3](https://github.com/user-attachments/assets/c7233fc1-627d-4e45-a21d-07dc01275629)
+![4](https://github.com/user-attachments/assets/48baa4ee-e34c-460a-9ada-29346440e25b)
