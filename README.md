@@ -1,5 +1,5 @@
 # Economie C++
-このアプリはC++で作られた家計簿です。  
+このアプリはC++とQtで作られた家計簿です。  
 
 ![1](https://github.com/user-attachments/assets/bab014b8-4f2c-4004-a056-72904c0ef23a)
 ![2](https://github.com/user-attachments/assets/550d32c0-866a-4ae8-b372-95018e4d9725)
